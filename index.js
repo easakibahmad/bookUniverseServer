@@ -157,6 +157,28 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.get("/fantasySpecific", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = {
+          email: req.query.email,
+        };
+      }
+      const cursor = fantasyCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/horrorSpecific", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = {
+          email: req.query.email,
+        };
+      }
+      const cursor = horrorCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
   }
 }

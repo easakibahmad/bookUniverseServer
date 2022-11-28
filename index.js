@@ -145,6 +145,18 @@ async function run() {
       const seller = await sellersCollection.deleteOne(query);
       res.send(seller);
     });
+
+    app.get("/classicsSpecific", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = {
+          email: req.query.email,
+        };
+      }
+      const cursor = classicCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
   }
 }

@@ -62,6 +62,22 @@ async function run() {
       res.send(fantasyCol);
     });
 
+    app.post("/classics", async (req, res) => {
+      const classics = req.body;
+      const result = await classicCollection.insertOne(classics);
+      res.send(result);
+    });
+    app.post("/fantasy", async (req, res) => {
+      const fantasy = req.body;
+      const result = await fantasyCollection.insertOne(fantasy);
+      res.send(result);
+    });
+    app.post("/horror", async (req, res) => {
+      const horror = req.body;
+      const result = await horrorCollection.insertOne(horror);
+      res.send(result);
+    });
+
     app.post("/bookings", async (req, res) => {
       const booking = req.body;
       const result = await bookingsCollection.insertOne(booking);

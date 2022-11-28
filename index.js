@@ -23,6 +23,11 @@ async function run() {
     const classicCollection = client.db("booksUniverse").collection("classics");
     const horrorCollection = client.db("booksUniverse").collection("horror");
     const fantasyCollection = client.db("booksUniverse").collection("fantasy");
+    const bookingsCollection = client
+      .db("booksUniverse")
+      .collection("bookings");
+    const buyersCollection = client.db("booksUniverse").collection("buyers");
+    const sellersCollection = client.db("booksUniverse").collection("sellers");
 
     app.get("/categories", async (req, res) => {
       const query = {};
@@ -54,6 +59,35 @@ async function run() {
       const cursor = fantasyCollection.find(query);
       const fantasyCol = await cursor.toArray();
       res.send(fantasyCol);
+    });
+
+    app.post("/bookings", async (req, res) => {
+      const booking = req.body;
+      const result = await bookingsCollection.insertOne(booking);
+      res.send(result);
+    });
+    app.post("/buyers", async (req, res) => {
+      const buyers = req.body;
+      const result = await buyersCollection.insertOne(buyers);
+      res.send(result);
+    });
+    app.post("/sellers", async (req, res) => {
+      const sellers = req.body;
+      const result = await sellersCollection.insertOne(sellers);
+      res.send(result);
+    });
+
+    app.get("/buyers", async (req, res) => {
+      const query = {};
+      const cursor = buyersCollection.find(query);
+      const buyersCol = await cursor.toArray();
+      res.send(buyersCol);
+    });
+    app.get("/sellers", async (req, res) => {
+      const query = {};
+      const cursor = sellersCollection.find(query);
+      const sellersCol = await cursor.toArray();
+      res.send(sellersCol);
     });
   } finally {
   }

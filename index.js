@@ -197,6 +197,43 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+
+    app.put("/classics/:id", async (req, res) => {
+      const id = req.params.id;
+      const add = req.body.add;
+      const query = { _id: ObjectId(id) };
+      const updateResult = {
+        $set: {
+          add: add,
+        },
+      };
+      const result = await classicCollection.updateOne(query, updateResult);
+      res.send(result);
+    });
+    app.put("/fantasy/:id", async (req, res) => {
+      const id = req.params.id;
+      const add = req.body.add;
+      const query = { _id: ObjectId(id) };
+      const updateResult = {
+        $set: {
+          add: add,
+        },
+      };
+      const result = await fantasyCollection.updateOne(query, updateResult);
+      res.send(result);
+    });
+    app.put("/horror/:id", async (req, res) => {
+      const id = req.params.id;
+      const add = req.body.add;
+      const query = { _id: ObjectId(id) };
+      const updateResult = {
+        $set: {
+          add: add,
+        },
+      };
+      const result = await horrorCollection.updateOne(query, updateResult);
+      res.send(result);
+    });
   } finally {
   }
 }

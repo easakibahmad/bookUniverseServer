@@ -28,6 +28,7 @@ async function run() {
       .collection("bookings");
     const buyersCollection = client.db("booksUniverse").collection("buyers");
     const sellersCollection = client.db("booksUniverse").collection("sellers");
+    const adminCollection = client.db("booksUniverse").collection("admin");
 
     app.get("/categories", async (req, res) => {
       const query = {};
@@ -101,6 +102,12 @@ async function run() {
       const query = { email };
       const seller = await sellersCollection.findOne(query);
       res.send({ isSellerMail: seller?.email === email });
+    });
+    app.get("/admin/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const admin = await adminCollection.findOne(query);
+      res.send({ isAdminMail: admin?.email === email });
     });
   } finally {
   }

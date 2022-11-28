@@ -89,6 +89,19 @@ async function run() {
       const sellersCol = await cursor.toArray();
       res.send(sellersCol);
     });
+
+    app.get("/buyers/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const buyer = await buyersCollection.findOne(query);
+      res.send({ isBuyerMail: buyer?.email === email });
+    });
+    app.get("/sellers/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const seller = await sellersCollection.findOne(query);
+      res.send({ isSellerMail: seller?.email === email });
+    });
   } finally {
   }
 }

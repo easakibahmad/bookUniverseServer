@@ -109,6 +109,20 @@ async function run() {
       const admin = await adminCollection.findOne(query);
       res.send({ isAdminMail: admin?.email === email });
     });
+
+    app.delete("/buyers/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const buyer = await buyersCollection.deleteOne(query);
+      res.send(buyer);
+    });
+
+    app.delete("/sellers/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const seller = await sellersCollection.deleteOne(query);
+      res.send(seller);
+    });
   } finally {
   }
 }

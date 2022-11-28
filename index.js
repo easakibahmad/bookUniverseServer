@@ -145,6 +145,24 @@ async function run() {
       const seller = await sellersCollection.deleteOne(query);
       res.send(seller);
     });
+    app.delete("/classics/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await classicCollection.deleteOne(query);
+      res.send(result);
+    });
+    app.delete("/fantasy/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await fantasyCollection.deleteOne(query);
+      res.send(result);
+    });
+    app.delete("/horror/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await horrorCollection.deleteOne(query);
+      res.send(result);
+    });
 
     app.get("/classicsSpecific", async (req, res) => {
       let query = {};

@@ -234,6 +234,28 @@ async function run() {
       const result = await horrorCollection.updateOne(query, updateResult);
       res.send(result);
     });
+
+    app.get("/horrorAdvertise", async (req, res) => {
+      let query = { add: "advertise" };
+
+      const cursor = horrorCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/classicAdvertise", async (req, res) => {
+      let query = { add: "advertise" };
+
+      const cursor = classicCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/fantasyAdvertise", async (req, res) => {
+      let query = { add: "advertise" };
+
+      const cursor = fantasyCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
   }
 }
